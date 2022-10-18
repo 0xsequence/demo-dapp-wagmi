@@ -1,0 +1,57 @@
+{
+  "name": "demo-dapp-wagmi",
+  "description": "Ethereum Demo Dapp + Wagmi built on Sequence stack",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "demo-dapp-wagmi",
+  "scripts": {
+    "dev": "BROWSER=none yarn start",
+    "start": "PORT=4000 GENERATE_SOURCEMAP=false react-app-rewired start",
+    "build": "BUILD_PATH='./dist' react-app-rewired build",
+    "eject": "react-scripts eject",
+    "dist": "yarn build",
+    "link-sequence": "yarn link 0xsequence @0xsequence/abi @0xsequence/api @0xsequence/auth @0xsequence/config @0xsequence/guard @0xsequence/multicall @0xsequence/network @0xsequence/provider @0xsequence/relayer @0xsequence/transactions @0xsequence/utils @0xsequence/wallet",
+    "unlink-sequence": "yarn unlink 0xsequence @0xsequence/abi @0xsequence/api @0xsequence/auth @0xsequence/config @0xsequence/guard @0xsequence/multicall @0xsequence/network @0xsequence/provider @0xsequence/relayer @0xsequence/transactions @0xsequence/utils @0xsequence/wallet"
+  },
+  "dependencies": {
+    "0xsequence": "^0.40.6",
+    "@0xsequence/ethauth": "0.7.0",
+    "@0xsequence/wagmi-connector": "1.0.0",
+    "@radix-ui/colors": "^0.1.8",
+    "@stitches/react": "^1.2.6",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.22",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "ethers": "^5.7.1",
+    "node-polyfill-webpack-plugin": "^1.1.4",
+    "react": "^17.0.2",
+    "react-app-rewired": "^2.1.11",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.5.5",
+    "wagmi": "^0.7.0",
+    "web-vitals": "^2.1.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

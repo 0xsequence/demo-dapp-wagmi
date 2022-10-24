@@ -1,5 +1,5 @@
-# Demo Dapp + Wagmi
-=====================
+Demo Dapp + Wagmi
+=================
 
 Dapp example on how to use Sequence Wallet with [Wagmi](https://wagmi.sh). Demonstrates how to connect a wallet, sign messages and send transactions.
 

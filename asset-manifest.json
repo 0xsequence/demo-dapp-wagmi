@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/demo-dapp-wagmi/static/js/main.58ac9cc7.js",
+    "main.js": "/demo-dapp-wagmi/static/js/main.aaa89ed7.js",
     "static/js/563.6ae456fe.chunk.js": "/demo-dapp-wagmi/static/js/563.6ae456fe.chunk.js",
     "static/js/787.f77ecafc.chunk.js": "/demo-dapp-wagmi/static/js/787.f77ecafc.chunk.js",
     "static/js/163.167dcea4.chunk.js": "/demo-dapp-wagmi/static/js/163.167dcea4.chunk.js",
     "static/media/logo.svg": "/demo-dapp-wagmi/static/media/logo.d7c9fc677fe69678a0a3dea6090ba6e9.svg",
     "index.html": "/demo-dapp-wagmi/index.html",
-    "main.58ac9cc7.js.map": "/demo-dapp-wagmi/static/js/main.58ac9cc7.js.map",
+    "main.aaa89ed7.js.map": "/demo-dapp-wagmi/static/js/main.aaa89ed7.js.map",
     "787.f77ecafc.chunk.js.map": "/demo-dapp-wagmi/static/js/787.f77ecafc.chunk.js.map",
     "163.167dcea4.chunk.js.map": "/demo-dapp-wagmi/static/js/163.167dcea4.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.58ac9cc7.js"
+    "static/js/main.aaa89ed7.js"
   ]
 }

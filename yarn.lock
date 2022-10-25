@@ -162,13 +162,10 @@
     ethers "^5.5.2"
     js-base64 "^3.7.2"
 
-"@0xsequence/wagmi-connector@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-1.0.0.tgz#3d9295c4ce0c467abfc0c81fd60003200883b43b"
-  integrity sha512-6Z26/eN/9YCgwcnMiUGyNZAM5BOPN0Cas027eGfnhDfJrP37rBATIFOCsaZ8bCkVnbYKOc3wD+9SHxOd+XKstQ==
-  dependencies:
-    "0xsequence" "^0.42.8"
-    wagmi "^0.7.5"
+"@0xsequence/wagmi-connector@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-1.0.1.tgz#dd14a885147ab6e0bd5cf19f29e1ecdd8390b259"
+  integrity sha512-D19eg6LqBkqXp6PYhgx4Mk624RwH4p3nnlPXdT2gYnL1kohMS3l3bLj6Ar8q5NoZgcaq7xlBWhMXon4ewixPmQ==
 
 "@0xsequence/wallet@^0.42.8":
   version "0.42.8"
@@ -10774,7 +10771,7 @@ w3c-xmlserializer@^2.0.0:
   dependencies:
     xml-name-validator "^3.0.0"
 
-wagmi@^0.7.0, wagmi@^0.7.5:
+wagmi@^0.7.0:
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-0.7.5.tgz#b38ce836957c68449a55ae0f5e32f0410769a618"
   integrity sha512-/HRzvunyd68Dt7QKiAsmbf7rO3rOmvr81/yNpig1pkUyadAgOhFop+4PMr6QoxgN0eJRSNOhpM4GgQxr0FTG/Q==

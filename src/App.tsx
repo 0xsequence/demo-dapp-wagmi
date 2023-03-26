@@ -39,7 +39,8 @@ const App = () => {
     new WalletConnectConnector({
       chains,
       options: {
-        qrcode: true,
+        projectId: 'b87cf8b78e1c5a9881adabe5765d2461',
+        showQrModal: true,
       },
     }),
   ]

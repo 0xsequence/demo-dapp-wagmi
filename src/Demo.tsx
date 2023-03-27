@@ -5,7 +5,7 @@ import logoUrl from './images/logo.svg'
 
 import { ethers } from 'ethers'
 import { sequence } from '0xsequence'
-import { useSigner, useProvider, useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useSigner, useProvider, useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi'
 
 import { ERC_20_ABI } from './constants/abi'
 
@@ -16,6 +16,32 @@ import { Console } from './components/Console'
 
 configureLogger({ logLevel: 'DEBUG' })
 
+const message = `Two roads diverged in a yellow wood,
+  Robert Frost poet
+  
+  And sorry I could not travel both
+  And be one traveler, long I stood
+  And looked down one as far as I could
+  To where it bent in the undergrowth;
+  
+  Then took the other, as just as fair,
+  And having perhaps the better claim,
+  Because it was grassy and wanted wear;
+  Though as for that the passing there
+  Had worn them really about the same,
+  
+  And both that morning equally lay
+  In leaves no step had trodden black.
+  Oh, I kept the first for another day!
+  Yet knowing how way leads on to way,
+  I doubted if I should ever come back.
+  
+  I shall be telling this with a sigh
+  Somewhere ages and ages hence:
+  Two roads diverged in a wood, and I—
+  I took the one less traveled by,
+  And that has made all the difference.`
+
 const App = () => {
   const { isConnected } = useAccount()
   const provider = useProvider()
@@ -25,6 +51,24 @@ const App = () => {
 
   const [consoleMsg, setConsoleMsg] = useState<null|string>(null)
   const [consoleLoading, setConsoleLoading] = useState<boolean>(false)
+
+  const { data, isError, isSuccess, signMessage } = useSignMessage({
+    message: message,
+    async onSettled(data, error) {
+      const wallet = sequence.getWallet()
+      const isValid = await sequence.utils.isValidMessageSignature(
+        await wallet.getAddress(),
+        message,
+        data,
+        wallet.getProvider()
+      )
+      addNewConsoleLine(`signature: ${data}`)
+      setTimeout(() => {
+        addNewConsoleLine(`is Valid: ${isValid}`)
+      }, 3000)
+      console.log(isValid)
+    }
+  })
 
   const appendConsoleLine = (message: string) => {
     return (setConsoleMsg((prevState => {
@@ -107,35 +151,9 @@ const App = () => {
     }
   }
 
-  const signMessage = async () => {
+  const signMessageDefault = async () => {
     try {
       resetConsole()  
-      const message = `Two roads diverged in a yellow wood,
-  Robert Frost poet
-  
-  And sorry I could not travel both
-  And be one traveler, long I stood
-  And looked down one as far as I could
-  To where it bent in the undergrowth;
-  
-  Then took the other, as just as fair,
-  And having perhaps the better claim,
-  Because it was grassy and wanted wear;
-  Though as for that the passing there
-  Had worn them really about the same,
-  
-  And both that morning equally lay
-  In leaves no step had trodden black.
-  Oh, I kept the first for another day!
-  Yet knowing how way leads on to way,
-  I doubted if I should ever come back.
-  
-  I shall be telling this with a sigh
-  Somewhere ages and ages hence:
-  Two roads diverged in a wood, and I—
-  I took the one less traveled by,
-  And that has made all the difference.`
-  
   
       // sign
       const sig = await signer.signMessage(message)
@@ -238,8 +256,11 @@ const App = () => {
         </Group>
 
         <Group label="Signing">
-          <Button disabled={disableActions} onClick={() => signMessage()}>
+          <Button disabled={disableActions} onClick={() => signMessageDefault()}>
             Sign Message
+          </Button>
+          <Button disabled={disableActions} onClick={() => signMessage()}>
+            Sign Message with useSignMessage
           </Button>
         </Group>
 

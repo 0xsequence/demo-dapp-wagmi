@@ -170,10 +170,10 @@
   dependencies:
     js-base64 "^3.7.2"
 
-"@0xsequence/wagmi-connector@1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-1.0.4.tgz#7741d0ba7230cdae4e793e796ba7b06666b11080"
-  integrity sha512-5KMB/CFuy4XhIhAC0YQ9lTmSOneLQ0e1tfNYqG9AIdR9bswaZnyle6rX7pPq2XHeagJIKQ+iBL+TUJbycFxMog==
+"@0xsequence/wagmi-connector@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-1.0.5.tgz#7b63d0b377f3065e871febbffbe6d6a85b5cc3c8"
+  integrity sha512-W/1HuLatFUWcNb1TOzbosv4MgVNxEKkio0jD58tLDqWf6blBuEHpsTgHnRaNobuLmaorU8+2sLyiMkBuTQKiaA==
 
 "@0xsequence/wallet@^0.43.26":
   version "0.43.26"

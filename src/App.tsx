@@ -6,17 +6,18 @@ import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import {
   configureChains,
-  createClient,
+  createConfig,
   WagmiConfig,
 } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from '@wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public';
+import { createPublicClient, http } from 'viem'
 import Demo from './Demo'
 
 import '@0xsequence/design-system/styles.css'
 
 const App = () => {
-  const { chains, provider } = configureChains(
+  const { chains, publicClient, webSocketPublicClient } = configureChains(
     [mainnet, polygon, optimism, arbitrum],
     [
       publicProvider()
@@ -45,16 +46,16 @@ const App = () => {
     }),
   ]
   
-  const wagmiClient = createClient({
+  const wagmiConfig = createConfig({
     autoConnect: true,
     connectors,
-    provider
+    publicClient,
+    webSocketPublicClient
   })
-
 
   return (
     <ThemeProvider>
-      <WagmiConfig client={wagmiClient}>
+      <WagmiConfig config={wagmiConfig}>
         <Demo />
       </WagmiConfig>
     </ThemeProvider>

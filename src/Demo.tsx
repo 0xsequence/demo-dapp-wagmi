@@ -157,8 +157,6 @@ const App = () => {
         signature: sig
       })
 
-      // // @ts-ignore
-      // const isValid = await sequence.utils.isValidMessageSignature(account, message, sig, publicClient)
       console.log('isValid?', isValid)
   
       appendConsoleLine(`isValid? ${isValid}`)

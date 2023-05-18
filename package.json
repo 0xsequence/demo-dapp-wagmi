@@ -17,7 +17,7 @@
     "0xsequence": "^0.43.26",
     "@0xsequence/design-system": "^0.1.107",
     "@0xsequence/ethauth": "0.7.0",
-    "@0xsequence/wagmi-connector": "^1.0.7",
+    "@0xsequence/wagmi-connector": "^1.1.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

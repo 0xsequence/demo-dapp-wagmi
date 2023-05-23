@@ -5,7 +5,10 @@ import logoUrl from './images/logo.svg'
 
 import { ethers } from 'ethers'
 import { sequence } from '0xsequence'
-import { useSigner, useProvider, useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useWalletClient, usePublicClient, useAccount, useConnect, useDisconnect } from 'wagmi'
+
+import { Address, formatEther, parseEther } from 'viem'
+import { polygon } from 'viem/chains' 
 
 import { ERC_20_ABI } from './constants/abi'
 
@@ -18,8 +21,8 @@ configureLogger({ logLevel: 'DEBUG' })
 
 const App = () => {
   const { isConnected } = useAccount()
-  const provider = useProvider()
-  const { data: signer } = useSigner()
+  const publicClient = usePublicClient()
+  const { data: walletClient } = useWalletClient()
   const { connect, connectors, isLoading, pendingConnector } = useConnect()
   const { disconnect } =  useDisconnect()
 
@@ -64,9 +67,9 @@ const App = () => {
   const getChainID = async () => {
     try {
       resetConsole()
-      const chainId = await signer.getChainId()
-      console.log('signer.getChainId()', chainId)
-      addNewConsoleLine(`signer.getChainId(): ${chainId}`)
+      const chainId = await walletClient.getChainId()
+      console.log('walletClient.getChainId()', chainId)
+      addNewConsoleLine(`walletClient.getChainId(): ${chainId}`)
       setConsoleLoading(false)
     } catch(e) {
       console.error(e)
@@ -77,14 +80,14 @@ const App = () => {
   const getBalance = async () => {
     try {
       resetConsole()
-      const account = await signer.getAddress()
-      const balanceChk1 = await provider!.getBalance(account)
-      console.log('balance check 1', balanceChk1.toString())
-      addNewConsoleLine(`balance check 1: ${balanceChk1.toString()}`)
+      const [account] = await walletClient.getAddresses()
+      const balance = await publicClient.getBalance({
+        address: account,
+      })
+      const formattedBalance = formatEther(balance)
+      console.log('balance', formattedBalance)
+      addNewConsoleLine(`balance: ${formattedBalance}`)
   
-      const balanceChk2 = await signer.getBalance()
-      console.log('balance check 2', balanceChk2.toString())
-      appendConsoleLine(`balance check 2: ${balanceChk2.toString()}`)
       setConsoleLoading(false) 
     } catch(e) {
       console.error(e)
@@ -93,13 +96,13 @@ const App = () => {
   }
 
 
-  const getNetworks = async () => {
+  const getNetwork = async () => {
     try {
       resetConsole()
-      const network = await provider!.getNetwork() 
-      console.log('networks:', network)
+      const network = publicClient.chain
+      console.log('network:', network)
   
-      addNewConsoleLine(`networks: ${JSON.stringify(network)}`)
+      addNewConsoleLine(`network: ${JSON.stringify(network)}`)
       setConsoleLoading(false) 
     } catch(e) {
       console.error(e)
@@ -135,15 +138,25 @@ const App = () => {
   Two roads diverged in a wood, and I—
   I took the one less traveled by,
   And that has made all the difference.`
+      
   
+      const [account] = await walletClient.getAddresses()
   
       // sign
-      const sig = await signer.signMessage(message)
+      const sig = await walletClient.signMessage({
+        message,
+        account
+      })
       console.log('signature:', sig)
   
       addNewConsoleLine(`signature: ${sig}`)
-  
-      const isValid = await sequence.utils.isValidMessageSignature(await signer.getAddress(), message, sig, provider as ethers.providers.Web3Provider)
+
+      const isValid = await publicClient.verifyMessage({
+        address: account,
+        message,
+        signature: sig
+      })
+
       console.log('isValid?', isValid)
   
       appendConsoleLine(`isValid? ${isValid}`)
@@ -158,25 +171,29 @@ const App = () => {
     try {
       resetConsole()
   
-      console.log(`Transfer txn on ${signer.getChainId()}`)
-      addNewConsoleLine(`Transfer txn on ${signer.getChainId()}`)
+      console.log(`Transfer txn on ${walletClient.getChainId()}`)
+      addNewConsoleLine(`Transfer txn on ${walletClient.getChainId()}`)
   
       const toAddress = ethers.Wallet.createRandom().address
   
-      const tx1 = {
-        gasLimit: '0x55555',
-        to: toAddress,
-        value: ethers.utils.parseEther('1.234'),
-        data: '0x'
-      }
-  
-      const balance1 = await provider!.getBalance(toAddress)
+      const balance1 = await publicClient.getBalance({
+        address: toAddress as Address
+      })
       console.log(`balance of ${toAddress}, before:`, balance1)
       appendConsoleLine(`balance of ${toAddress}, before: ${balance1}`)
-      const txnResp = await signer.sendTransaction(tx1)
-      await txnResp.wait()
-  
-      const balance2 = await provider!.getBalance(toAddress)
+      
+      const [account] = await walletClient.getAddresses()
+
+      /* @ts-ignore-next-line */
+      await walletClient.sendTransaction({
+        to: toAddress as Address,
+        value: parseEther('1.00'),
+        account,
+      })
+
+      const balance2 = await publicClient.getBalance({
+        address: toAddress as Address
+      })
       console.log(`balance of ${toAddress}, after:`, balance2)
       appendConsoleLine(`balance of ${toAddress}, after: ${balance2}`)
       setConsoleLoading(false) 
@@ -194,19 +211,19 @@ const App = () => {
       const amount = ethers.utils.parseUnits('5', 18)
   
       const daiContractAddress = '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063' // (DAI address on Polygon)
-  
-      const tx = {
-        gasLimit: '0x55555',
+
+      const [account] = await walletClient.getAddresses()
+
+      /* @ts-ignore-next-line */
+      const hash = await walletClient.sendTransaction({
+        account,
         to: daiContractAddress,
-        value: 0,
-        data: new ethers.utils.Interface(ERC_20_ABI).encodeFunctionData('transfer', [toAddress, amount.toHexString()])
-      }
+        value: 0n,
+        data: new ethers.utils.Interface(ERC_20_ABI).encodeFunctionData('transfer', [toAddress, amount.toHexString()]) as `0x${string}`
+      })
   
-      const txnResp = await signer.sendTransaction(tx)
-      await txnResp.wait()
-  
-      console.log('transaction response', txnResp)
-      addNewConsoleLine(`TX response ${JSON.stringify(txnResp)}`)
+      console.log('transaction response', hash)
+      addNewConsoleLine(`TX response ${hash}`)
       setConsoleLoading(false) 
     } catch(e) {
       console.error(e)
@@ -229,8 +246,8 @@ const App = () => {
           <Button disabled={disableActions} onClick={() => getChainID()}>
             ChainID
           </Button>
-          <Button disabled={disableActions} onClick={() => getNetworks()}>
-            Networks
+          <Button disabled={disableActions} onClick={() => getNetwork()}>
+            Network
           </Button>
           <Button disabled={disableActions} onClick={() => getBalance()}>
             Get Balance

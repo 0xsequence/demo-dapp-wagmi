@@ -217,10 +217,10 @@
   dependencies:
     js-base64 "^3.7.2"
 
-"@0xsequence/wagmi-connector@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-2.0.1.tgz#df75f373fad8909edee7a8621eed60a3770a5fa1"
-  integrity sha512-meYa9FWvYVaqXxJWE3/zan8CIsGnl/MrsoE3+oHfw0BKi/5Fe3PFAD/tNmcYRYybB1/FJpTm4/FG6uW/eu6xXg==
+"@0xsequence/wagmi-connector@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-2.0.2.tgz#44c989a0e355d710755285c502655359661d4d40"
+  integrity sha512-02nWFHpwXDafijIuoJ2f7Aubc8TczXznKu7PWNlwdOQd1zDrKUPFMNclmw6/ZNH+/8X7GQRbgbQ6ikwFiIusaw==
   dependencies:
     abitype "0.8.2"
 

@@ -9,7 +9,7 @@ import {
   createConfig,
   WagmiConfig,
 } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum } from '@wagmi/chains'
+import { mainnet, polygon, optimism, arbitrum, polygonMumbai } from '@wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public';
 import { createPublicClient, http } from 'viem'
 import Demo from './Demo'
@@ -18,7 +18,7 @@ import '@0xsequence/design-system/styles.css'
 
 const App = () => {
   const { chains, publicClient, webSocketPublicClient } = configureChains(
-    [mainnet, polygon, optimism, arbitrum],
+    [mainnet, polygon, optimism, arbitrum, polygonMumbai],
     [
       publicProvider()
     ]

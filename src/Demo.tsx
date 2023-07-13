@@ -4,11 +4,9 @@ import React, { useState, useEffect } from 'react'
 import logoUrl from './images/logo.svg'
 
 import { ethers } from 'ethers'
-import { sequence } from '0xsequence'
-import { useWalletClient, usePublicClient, useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useWalletClient, usePublicClient, useAccount, useConnect, useDisconnect, useSwitchNetwork, useChainId } from 'wagmi'
 
 import { Address, formatEther, parseEther } from 'viem'
-import { polygon } from 'viem/chains' 
 
 import { ERC_20_ABI } from './constants/abi'
 
@@ -24,6 +22,7 @@ const App = () => {
   const publicClient = usePublicClient()
   const { data: walletClient } = useWalletClient()
   const { connect, connectors, isLoading, pendingConnector } = useConnect()
+  const { switchNetwork } = useSwitchNetwork()
   const { disconnect } =  useDisconnect()
 
   const [consoleMsg, setConsoleMsg] = useState<null|string>(null)
@@ -63,6 +62,19 @@ const App = () => {
       consoleWelcomeMessage()
     }
   }, [isConnected])
+
+  const getAddress = async () => {
+    try {
+      resetConsole()
+      const [account] = await walletClient.getAddresses()
+      console.log('walletClient.getAddresses()', account)
+      addNewConsoleLine(`walletClient.getAddresses(): ${account}`)
+      setConsoleLoading(false)
+    } catch(e) {
+      console.error(e)
+      consoleErrorMesssage()
+    }
+  }
 
   const getChainID = async () => {
     try {
@@ -231,6 +243,24 @@ const App = () => {
     }
   }
 
+  const switchTo = async (chainId: number, mode: 'wallet-client' | 'switch-network') => {
+    try {
+      resetConsole()
+      console.log(`Switching to ${chainId}`, mode)
+      addNewConsoleLine(`Switching to ${chainId}`)
+  
+      if (mode === 'wallet-client') {
+        await walletClient.switchChain({ id: chainId })
+      } else {
+        switchNetwork(chainId)
+      }
+
+      setConsoleLoading(false) 
+    } catch(e) {
+      console
+    }
+  }
+
   const disableActions = !isConnected
 
   const getWalletActions = () => {
@@ -243,6 +273,9 @@ const App = () => {
           <Text>Please open your browser dev inspector to view output of functions below</Text>
         </Box>
         <Group label="State">
+          <Button disabled={disableActions} onClick={() => getAddress()}>
+            Address
+          </Button>
           <Button disabled={disableActions} onClick={() => getChainID()}>
             ChainID
           </Button>
@@ -251,6 +284,24 @@ const App = () => {
           </Button>
           <Button disabled={disableActions} onClick={() => getBalance()}>
             Get Balance
+          </Button>
+        </Group>
+
+        <Group label="Network switching">
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(42161, 'wallet-client')}>
+            Switch to Arbitrum (walletClient.switchChain)
+          </Button>
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(137, 'wallet-client')}>
+            Switch to Polygon (walletClient.switchChain)
+          </Button>
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(10, 'switch-network')}>
+            Switch to Optimism (useSwitchNetwork)
+          </Button>
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(1, 'switch-network')}>
+            Switch to Mainnet (useSwitchNetwork)
+          </Button>
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(80001, 'switch-network')}>
+            Switch to Mumbai
           </Button>
         </Group>
 

@@ -261,6 +261,27 @@ const App = () => {
     }
   }
 
+  const estimateGas = async () => {
+    try {
+      resetConsole()
+
+      // This is a contract that is only deployed on Goerli
+      // and is not deployed on any other network, when called it spends
+      // 300k gas, so estimating the gas (on Goerli) should return 300k
+      const estimated = await publicClient.estimateGas({
+        account: '0x84DF199d0a30E4D0831Ec9877588D12fF9D01268',
+        to: '0x84DF199d0a30E4D0831Ec9877588D12fF9D01268'
+      } as any)
+
+      console.log('estimated gas:', estimated)
+      addNewConsoleLine(`estimated gas: ${estimated}`)
+
+    } catch (e) {
+      console.error(e)
+      consoleErrorMesssage()
+    }
+  }
+
   const disableActions = !isConnected
 
   const getWalletActions = () => {
@@ -303,6 +324,9 @@ const App = () => {
           <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(80001, 'switch-network')}>
             Switch to Mumbai
           </Button>
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(5, 'wallet-client')}>
+            Switch to Goerli
+          </Button>
         </Group>
 
         <Group label="Signing">
@@ -319,7 +343,13 @@ const App = () => {
             Send DAI Tokens
           </Button>
         </Group>
-        </>
+
+        <Group label="Misc">
+          <Button disabled={disableActions} onClick={() => estimateGas()}>
+            Estimate gas
+          </Button>
+        </Group>
+      </>
     )
   }
 

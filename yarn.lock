@@ -217,10 +217,17 @@
   dependencies:
     js-base64 "^3.7.2"
 
-"@0xsequence/wagmi-connector@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-2.0.2.tgz#44c989a0e355d710755285c502655359661d4d40"
-  integrity sha512-02nWFHpwXDafijIuoJ2f7Aubc8TczXznKu7PWNlwdOQd1zDrKUPFMNclmw6/ZNH+/8X7GQRbgbQ6ikwFiIusaw==
+"@0xsequence/utils@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@0xsequence/utils/-/utils-1.0.3.tgz#c79d8aaf6cf1b9d04793cb0ac91b53beae526395"
+  integrity sha512-ou18tv0pVUIseXAmzE26zJQcZQJ75/v4BfPw4fds6V0kTG29izncaQqdIjPmP6NJCBzLLZlkbCkqOLqvB5rQRw==
+  dependencies:
+    js-base64 "^3.7.2"
+
+"@0xsequence/wagmi-connector@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@0xsequence/wagmi-connector/-/wagmi-connector-2.0.3.tgz#2e4cc5f57070de7c29c65459ebc6b34462400e39"
+  integrity sha512-NzzFujXSsVJ/j47tmXiJe04fV+d165Y0JEkks6ncW55Z0680VcM9+MPwAte1OTUOgIx7e9aaGO9kQBGUo8IEmQ==
   dependencies:
     abitype "0.8.2"
 

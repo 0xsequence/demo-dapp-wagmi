@@ -1,4 +1,3 @@
-import React from 'react'
 import { ThemeProvider } from '@0xsequence/design-system'
 
 import { SequenceConnector } from '@0xsequence/wagmi-connector'
@@ -10,8 +9,7 @@ import {
   WagmiConfig,
 } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, polygonMumbai, goerli } from '@wagmi/chains'
-import { publicProvider } from 'wagmi/providers/public';
-import { createPublicClient, http } from 'viem'
+import { sequence } from '0xsequence'
 import Demo from './Demo'
 
 import '@0xsequence/design-system/styles.css'
@@ -20,9 +18,16 @@ const App = () => {
   const { chains, publicClient, webSocketPublicClient } = configureChains(
     [mainnet, polygon, optimism, arbitrum, polygonMumbai, goerli],
     [
-      publicProvider()
+      (chain) => {
+        const network = sequence.network.findNetworkConfig(sequence.network.allNetworks, chain.id)
+        if (!network) {
+          throw new Error(`Could not find network config for chain ${chain.id}`)
+        }
+
+        return { chain, rpcUrls: { http: [network.rpcUrl] } }
+      }
     ]
-  );
+  )
 
   const connectors = [
     new SequenceConnector({

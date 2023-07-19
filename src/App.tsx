@@ -29,13 +29,25 @@ const App = () => {
     ]
   )
 
+  const urlParams = new URLSearchParams(window.location.search)
+  let walletAppURL = 'https://sequence.app'
+
+  if (urlParams.get('walletAppURL') && urlParams.get('walletAppURL').length > 0) {
+    walletAppURL = urlParams.get('walletAppURL')
+  }
+
   const connectors = [
     new SequenceConnector({
       chains,
       options: {
         connect: {
           app: 'Demo-app',
-          networkId: 137
+          networkId: 137,
+
+          // This is optional, and only used to point to a custom
+          // environment for the wallet app. By default, it will
+          // point to https://sequence.app/
+          walletAppURL
         }
       }
     }),

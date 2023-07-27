@@ -40,9 +40,10 @@ const App = () => {
     new SequenceConnector({
       chains,
       options: {
+        defaultNetwork: 137,
+
         connect: {
           app: 'Demo-app',
-          networkId: 137,
 
           // This is optional, and only used to point to a custom
           // environment for the wallet app. By default, it will

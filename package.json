@@ -18,7 +18,7 @@
     "@0xsequence/design-system": "^0.1.107",
     "@0xsequence/ethauth": "0.7.0",
     "@0xsequence/utils": "^1.0.3",
-    "@0xsequence/wagmi-connector": "^2.1.0",
+    "@0xsequence/wagmi-connector": "^2.1.2",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -34,8 +34,8 @@
     "react-app-rewired": "^2.1.11",
     "react-dom": "^18.0.0",
     "typescript": "^4.5.5",
-    "viem": "^0.3.28",
-    "wagmi": "^1.0.5",
+    "viem": "^1.11.1",
+    "wagmi": "^1.4.2",
     "web-vitals": "^2.1.4"
   },
   "eslintConfig": {

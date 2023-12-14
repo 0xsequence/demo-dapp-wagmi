@@ -34,8 +34,8 @@
     "react-app-rewired": "^2.1.11",
     "react-dom": "^18.0.0",
     "typescript": "^5.2.2",
-    "viem": "^1.15.1",
-    "wagmi": "^1.4.3",
+    "viem": "^1.19.15",
+    "wagmi": "^1.4.12",
     "web-vitals": "^2.1.4"
   },
   "eslintConfig": {

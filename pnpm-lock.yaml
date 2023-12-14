@@ -66,10 +66,10 @@ dependencies:
     specifier: ^5.2.2
     version: 5.3.3
   viem:
-    specifier: ^1.15.1
+    specifier: ^1.19.15
     version: 1.19.15(typescript@5.3.3)
   wagmi:
-    specifier: ^1.4.3
+    specifier: ^1.4.12
     version: 1.4.12(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)(viem@1.19.15)
   web-vitals:
     specifier: ^2.1.4

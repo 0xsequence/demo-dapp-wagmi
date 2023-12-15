@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.0.3
     version: 1.6.1(ethers@5.7.2)
   '@0xsequence/wagmi-connector':
-    specifier: ^2.1.4
-    version: 2.1.4(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12)
+    specifier: ^2.1.5
+    version: 2.1.5(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12)
   '@testing-library/jest-dom':
     specifier: ^5.16.2
     version: 5.17.0
@@ -359,8 +359,8 @@ packages:
       js-base64: 3.7.5
     dev: false
 
-  /@0xsequence/wagmi-connector@2.1.4(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12):
-    resolution: {integrity: sha512-1YdP9+JpJszOAe4EzJ2c1EVUdV0UN6d3dxI3Zmfo1rux8ynPycURDi3hmpIIjOyl0kmde/sm/6evDyfaGVBxbA==}
+  /@0xsequence/wagmi-connector@2.1.5(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12):
+    resolution: {integrity: sha512-8FrXtiOfQ+Iwq4iiwqB7sjw/OHumxHCj8qoIF0GpG/H7ZdRwOfjdHFCHahcZUkov4OomReqRNrthXnuCQ7Vkyw==}
     peerDependencies:
       0xsequence: '>=1.1.0 <2.0.0'
       ethers: '>=5.5'
@@ -3384,6 +3384,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -11331,6 +11332,10 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: false
 
   /natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}

@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.0.3
     version: 1.6.1(ethers@5.7.2)
   '@0xsequence/wagmi-connector':
-    specifier: ^2.1.5
-    version: 2.1.5(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12)
+    specifier: ^2.1.6
+    version: 2.1.6(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12)
   '@testing-library/jest-dom':
     specifier: ^5.16.2
     version: 5.17.0
@@ -359,8 +359,8 @@ packages:
       js-base64: 3.7.5
     dev: false
 
-  /@0xsequence/wagmi-connector@2.1.5(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12):
-    resolution: {integrity: sha512-8FrXtiOfQ+Iwq4iiwqB7sjw/OHumxHCj8qoIF0GpG/H7ZdRwOfjdHFCHahcZUkov4OomReqRNrthXnuCQ7Vkyw==}
+  /@0xsequence/wagmi-connector@2.1.6(0xsequence@1.6.1)(ethers@5.7.2)(typescript@5.3.3)(viem@1.19.15)(wagmi@1.4.12):
+    resolution: {integrity: sha512-T7bRdBG4ePnsmnqYMZA4pY95FIbtBTEHYWP0obAmhwUTxUtqNIdWLSh3Avmewz5rsej7wKfF441Pr6uznu/DzA==}
     peerDependencies:
       0xsequence: '>=1.1.0 <2.0.0'
       ethers: '>=5.5'

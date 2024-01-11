@@ -269,8 +269,8 @@ const App = () => {
       // and is not deployed on any other network, when called it spends
       // 300k gas, so estimating the gas (on Sepolia) should return 300k
       const estimated = await publicClient.estimateGas({
-        account: '0x84DF199d0a30E4D0831Ec9877588D12fF9D01268',
-        to: '0x84DF199d0a30E4D0831Ec9877588D12fF9D01268'
+        account: '0x7A3979A8B114DB14618417Cc9f7893929aD29F2d',
+        to: '0x7A3979A8B114DB14618417Cc9f7893929aD29F2d'
       } as any)
 
       console.log('estimated gas:', estimated)

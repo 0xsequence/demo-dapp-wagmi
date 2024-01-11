@@ -8,7 +8,7 @@ import {
   createConfig,
   WagmiConfig,
 } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, polygonMumbai, goerli } from '@wagmi/chains'
+import { mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia } from '@wagmi/chains'
 import { sequence } from '0xsequence'
 import Demo from './Demo'
 
@@ -16,7 +16,7 @@ import '@0xsequence/design-system/styles.css'
 
 const App = () => {
   const { chains, publicClient, webSocketPublicClient } = configureChains(
-    [mainnet, polygon, optimism, arbitrum, polygonMumbai, goerli],
+    [mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia],
     [
       (chain) => {
         const network = sequence.network.findNetworkConfig(sequence.network.allNetworks, chain.id)

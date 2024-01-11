@@ -265,9 +265,9 @@ const App = () => {
     try {
       resetConsole()
 
-      // This is a contract that is only deployed on Goerli
+      // This is a contract that is only deployed on Sepolia
       // and is not deployed on any other network, when called it spends
-      // 300k gas, so estimating the gas (on Goerli) should return 300k
+      // 300k gas, so estimating the gas (on Sepolia) should return 300k
       const estimated = await publicClient.estimateGas({
         account: '0x84DF199d0a30E4D0831Ec9877588D12fF9D01268',
         to: '0x84DF199d0a30E4D0831Ec9877588D12fF9D01268'
@@ -324,8 +324,8 @@ const App = () => {
           <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(80001, 'switch-network')}>
             Switch to Mumbai
           </Button>
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(5, 'wallet-client')}>
-            Switch to Goerli
+          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(11155111, 'wallet-client')}>
+            Switch to Sepolia
           </Button>
         </Group>
 

@@ -1,12 +1,13 @@
 import { ThemeProvider } from '@0xsequence/design-system'
 
 import { SequenceConnector } from '@0xsequence/wagmi-connector'
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' 
+
+import { metaMask, walletConnect } from 'wagmi/connectors'
+
 import {
-  configureChains,
   createConfig,
-  WagmiConfig,
+  WagmiProvider
 } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia } from '@wagmi/chains'
 import { sequence } from '0xsequence'
@@ -14,21 +15,9 @@ import Demo from './Demo'
 
 import '@0xsequence/design-system/styles.css'
 
+const queryClient = new QueryClient() 
+
 const App = () => {
-  const { chains, publicClient, webSocketPublicClient } = configureChains(
-    [mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia],
-    [
-      (chain) => {
-        const network = sequence.network.findNetworkConfig(sequence.network.allNetworks, chain.id)
-        if (!network) {
-          throw new Error(`Could not find network config for chain ${chain.id}`)
-        }
-
-        return { chain, rpcUrls: { http: [network.rpcUrl] } }
-      }
-    ]
-  )
-
   const urlParams = new URLSearchParams(window.location.search)
   let walletAppURL = 'https://sequence.app'
 
@@ -52,30 +41,40 @@ const App = () => {
         }
       }
     }),
-    new MetaMaskConnector({
-      chains,
-    }),
-    new WalletConnectConnector({
-      chains,
-      options: {
-        projectId: 'b87cf8b78e1c5a9881adabe5765d2461',
-        showQrModal: true,
-      },
+    metaMask(),
+    walletConnect({
+      projectId: 'b87cf8b78e1c5a9881adabe5765d2461',
+      showQrModal: true,
     }),
   ]
   
+
+  const getTransportByChain = (chain) => {
+    const network = sequence.network.findNetworkConfig(sequence.network.allNetworks, chain.id)
+    if (!network) {
+      throw new Error(`Could not find network config for chain ${chain.id}`)
+    }
+
+    return { chain, rpcUrls: { http: [network.rpcUrl] } }
+  }
+
+  const chains = [mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia]
+  const transports = {}
+  chains.forEach(chain => {
+    transports[chain.id] = getTransportByChain(chain)
+  })
   const wagmiConfig = createConfig({
-    autoConnect: true,
-    connectors,
-    publicClient,
-    webSocketPublicClient
+    chains,
+    transports,
   })
 
   return (
     <ThemeProvider>
-      <WagmiConfig config={wagmiConfig}>
-        <Demo />
-      </WagmiConfig>
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}> 
+          <Demo />
+        </QueryClientProvider> 
+      </WagmiProvider>
     </ThemeProvider>
   )
 }

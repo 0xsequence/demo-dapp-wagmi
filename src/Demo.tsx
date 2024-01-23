@@ -4,7 +4,14 @@ import React, { useState, useEffect } from 'react'
 import logoUrl from './images/logo.svg'
 
 import { ethers } from 'ethers'
-import { useWalletClient, usePublicClient, useAccount, useConnect, useDisconnect, useSwitchNetwork, useChainId } from 'wagmi'
+import {
+  useWalletClient,
+  usePublicClient,
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useSwitchChain,
+} from 'wagmi'
 
 import { Address, formatEther, parseEther } from 'viem'
 
@@ -18,11 +25,11 @@ import { Console } from './components/Console'
 configureLogger({ logLevel: 'DEBUG' })
 
 const App = () => {
+  const { chains, switchChain } = useSwitchChain()
   const { isConnected } = useAccount()
   const publicClient = usePublicClient()
   const { data: walletClient } = useWalletClient()
-  const { connect, connectors, isLoading, pendingConnector } = useConnect()
-  const { switchNetwork } = useSwitchNetwork()
+  const { connect, connectors, isPending} = useConnect()
   const { disconnect } =  useDisconnect()
 
   const [consoleMsg, setConsoleMsg] = useState<null|string>(null)
@@ -252,7 +259,7 @@ const App = () => {
       if (mode === 'wallet-client') {
         await walletClient.switchChain({ id: chainId })
       } else {
-        switchNetwork(chainId)
+        switchChain({ chainId })
       }
 
       setConsoleLoading(false) 
@@ -309,24 +316,13 @@ const App = () => {
         </Group>
 
         <Group label="Network switching">
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(42161, 'wallet-client')}>
-            Switch to Arbitrum (walletClient.switchChain)
-          </Button>
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(137, 'wallet-client')}>
-            Switch to Polygon (walletClient.switchChain)
-          </Button>
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(10, 'switch-network')}>
-            Switch to Optimism (useSwitchNetwork)
-          </Button>
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(1, 'switch-network')}>
-            Switch to Mainnet (useSwitchNetwork)
-          </Button>
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(80001, 'switch-network')}>
-            Switch to Mumbai
-          </Button>
-          <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(11155111, 'wallet-client')}>
-            Switch to Sepolia
-          </Button>
+          {chains.map(chain => {
+            return (
+              <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(chain.id, 'wallet-client')}>
+                Switch to {chain.name} (walletClient.switchChain)
+              </Button>
+            )
+          })}
         </Group>
 
         <Group label="Signing">
@@ -359,15 +355,11 @@ const App = () => {
         <Box gap="4" flexDirection="column" marginY="4">
           {connectors.map((connector) => (
             <Button
-              disabled={!connector.ready}
+              disabled={isPending}
               key={connector.id}
               onClick={() => connect({ connector })}
             >
               {connector.name}
-              {!connector.ready && ' (unsupported)'}
-              {isLoading &&
-                connector.id === pendingConnector?.id &&
-                ' (connecting)'}
             </Button>
           ))}
         </Box>

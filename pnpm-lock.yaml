@@ -19,7 +19,7 @@ dependencies:
     version: 1.6.1(ethers@5.7.2)
   '@0xsequence/wagmi-connector':
     specifier: file:../wagmi-connector
-    version: file:../wagmi-connector(0xsequence@1.6.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.1.2)
+    version: file:../wagmi-connector(0xsequence@1.6.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.5.0)
   '@tanstack/react-query':
     specifier: ^5.17.9
     version: 5.17.9(react@18.2.0)
@@ -72,8 +72,8 @@ dependencies:
     specifier: ^2.0.6
     version: 2.0.6(typescript@5.3.3)
   wagmi:
-    specifier: ^2.1.2
-    version: 2.1.2(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
+    specifier: ^2.5.0
+    version: 2.5.0(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
   web-vitals:
     specifier: ^2.1.4
     version: 2.1.4
@@ -3696,6 +3696,7 @@ packages:
 
   /@motionone/vue@10.16.4:
     resolution: {integrity: sha512-z10PF9JV6SbjFq+/rYabM+8CVlMokgl8RFGvieSGNTmrkQanfHn+15XBrhG3BgUfvmTeSeyShfOHpG0i9zEdcg==}
+    deprecated: Motion One for Vue is deprecated. Use Oku Motion instead https://oku-ui.com/motion
     dependencies:
       '@motionone/dom': 10.16.4
       tslib: 2.6.2
@@ -6438,10 +6439,10 @@ packages:
     resolution: {integrity: sha512-hSzb6Ni/PejVzliKkc5T3ehzRJxr5k4fZMGYuouqwArWQ8z7R4jrIlm2j2nNOD7Epz6ZucdiVluU1YH0d/EEyw==}
     dev: false
 
-  /@wagmi/connectors@4.1.2(@types/react@18.2.45)(@wagmi/core@2.1.2)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6):
-    resolution: {integrity: sha512-fSTSZaGBmbwUjpEvhojE+UVFGuR8Cg0luUp2bVPAVoKngzrnYxC+53IKuNFzhieI6rtAaAkjmWQQ6JAv7H0KKA==}
+  /@wagmi/connectors@4.1.8(@types/react@18.2.45)(@wagmi/core@2.5.0)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6):
+    resolution: {integrity: sha512-ODQUB1YGn0rofOcg7T5UCzHZNKSgai4Nri7harI4wao13J2gPcjIsPewiGwKWhCd8nePICUvZ2IL0b6gWq3cqA==}
     peerDependencies:
-      '@wagmi/core': 2.1.2
+      '@wagmi/core': 2.5.0
       typescript: '>=5.0.4'
       viem: 2.x
     peerDependenciesMeta:
@@ -6452,7 +6453,7 @@ packages:
       '@metamask/sdk': 0.14.1(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)
       '@safe-global/safe-apps-provider': 0.18.1(typescript@5.3.3)
       '@safe-global/safe-apps-sdk': 8.1.0(typescript@5.3.3)
-      '@wagmi/core': 2.1.2(@types/react@18.2.45)(react@18.2.0)(typescript@5.3.3)(viem@2.0.6)
+      '@wagmi/core': 2.5.0(@types/react@18.2.45)(react@18.2.0)(typescript@5.3.3)(viem@2.0.6)
       '@walletconnect/ethereum-provider': 2.11.0(@types/react@18.2.45)(react@18.2.0)
       '@walletconnect/modal': 2.6.2(@types/react@18.2.45)(react@18.2.0)
       typescript: 5.3.3
@@ -6482,8 +6483,8 @@ packages:
       - zod
     dev: false
 
-  /@wagmi/core@2.1.2(@types/react@18.2.45)(react@18.2.0)(typescript@5.3.3)(viem@2.0.6):
-    resolution: {integrity: sha512-Rv7gc0pILlrNGpFDuPElIOrTaHPDxrbZoZivl3CNndCOXNUqaxgfbEVt7qFsILF+kmnDGmu7/0qJ7YhZZhyHpg==}
+  /@wagmi/core@2.5.0(@types/react@18.2.45)(react@18.2.0)(typescript@5.3.3)(viem@2.0.6):
+    resolution: {integrity: sha512-aWWxIctf76NXBDzbX+FPsBLB3lkGwf1wqbQZJqb+pyuzwwN2dR1NDwsYlPVMeP6SKliKsfxlYWFcKCkPqGuJqg==}
     peerDependencies:
       '@tanstack/query-core': '>=5.0.0'
       typescript: '>=5.0.4'
@@ -9688,12 +9689,6 @@ packages:
       xtend: 4.0.2
     dev: false
 
-  /eth-rpc-errors@4.0.2:
-    resolution: {integrity: sha512-n+Re6Gu8XGyfFy1it0AwbD1x0MUzspQs0D5UiPs1fFPCr6WAwZM+vbIhXheBFrpgosqN9bs5PqlB4Q61U/QytQ==}
-    dependencies:
-      fast-safe-stringify: 2.1.1
-    dev: false
-
   /eth-rpc-errors@4.0.3:
     resolution: {integrity: sha512-Z3ymjopaoft7JDoxZcEb3pwdGh7yiYMhOwm2doUt6ASXlMavpNlK6Cre0+IMl2VSGyEU9rkiperQhp5iRxn5Pg==}
     dependencies:
@@ -11960,7 +11955,7 @@ packages:
     engines: {node: '>=10.0.0'}
     dependencies:
       '@metamask/safe-event-emitter': 2.0.0
-      eth-rpc-errors: 4.0.2
+      eth-rpc-errors: 4.0.3
     dev: false
 
   /json-rpc-middleware-stream@4.2.3:
@@ -16720,8 +16715,8 @@ packages:
       xml-name-validator: 3.0.0
     dev: false
 
-  /wagmi@2.1.2(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6):
-    resolution: {integrity: sha512-M4Mhz5ucvRWSApbw/7KCDm7H+naoeibKH9tcZLC/eW7f4U8jBR1x5YKpLhmANO0WJOh6vt3rSHlCsS+J4lrm1A==}
+  /wagmi@2.5.0(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6):
+    resolution: {integrity: sha512-rP6u49LPQXv+46EzokL7dTlLGduenMqt4ZQ76M4jCR6lTDs7/PaJGevrIGKZiCUYSm1nvvtdDlR1GlJ9u+Q8RA==}
     peerDependencies:
       '@tanstack/react-query': '>=5.0.0'
       react: '>=18'
@@ -16732,8 +16727,8 @@ packages:
         optional: true
     dependencies:
       '@tanstack/react-query': 5.17.9(react@18.2.0)
-      '@wagmi/connectors': 4.1.2(@types/react@18.2.45)(@wagmi/core@2.1.2)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
-      '@wagmi/core': 2.1.2(@types/react@18.2.45)(react@18.2.0)(typescript@5.3.3)(viem@2.0.6)
+      '@wagmi/connectors': 4.1.8(@types/react@18.2.45)(@wagmi/core@2.5.0)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
+      '@wagmi/core': 2.5.0(@types/react@18.2.45)(react@18.2.0)(typescript@5.3.3)(viem@2.0.6)
       react: 18.2.0
       typescript: 5.3.3
       use-sync-external-store: 1.2.0(react@18.2.0)
@@ -17499,7 +17494,7 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  file:../wagmi-connector(0xsequence@1.6.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.1.2):
+  file:../wagmi-connector(0xsequence@1.6.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.5.0):
     resolution: {directory: ../wagmi-connector, type: directory}
     id: file:../wagmi-connector
     name: '@0xsequence/wagmi-connector'
@@ -17515,7 +17510,7 @@ packages:
       abitype: 0.8.2(typescript@5.3.3)
       ethers: 5.7.2
       viem: 2.0.6(typescript@5.3.3)
-      wagmi: 2.1.2(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
+      wagmi: 2.5.0(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
     transitivePeerDependencies:
       - typescript
       - zod

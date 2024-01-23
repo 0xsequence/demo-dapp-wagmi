@@ -1,15 +1,16 @@
 import { ThemeProvider } from '@0xsequence/design-system'
 
-import { SequenceConnector } from '@0xsequence/wagmi-connector'
+import { sequenceWallet } from '@0xsequence/wagmi-connector'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query' 
 
-import { metaMask, walletConnect } from 'wagmi/connectors'
+import { walletConnect } from 'wagmi/connectors'
 
 import {
   createConfig,
-  WagmiProvider
+  WagmiProvider,
+  http
 } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia } from '@wagmi/chains'
+import { mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia, Chain } from '@wagmi/chains'
 import { sequence } from '0xsequence'
 import Demo from './Demo'
 
@@ -25,46 +26,37 @@ const App = () => {
     walletAppURL = urlParams.get('walletAppURL')
   }
 
+  const chains = [mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia] as [Chain, ...Chain[]]
+
   const connectors = [
-    new SequenceConnector({
-      chains,
-      options: {
-        defaultNetwork: 137,
+    sequenceWallet({
+      defaultNetwork: 137,
+      connect: {
+        app: 'Demo-app',
 
-        connect: {
-          app: 'Demo-app',
-
-          // This is optional, and only used to point to a custom
-          // environment for the wallet app. By default, it will
-          // point to https://sequence.app/
-          walletAppURL
-        }
+        // This is optional, and only used to point to a custom
+        // environment for the wallet app. By default, it will
+        // point to https://sequence.app/
+        walletAppURL
       }
     }),
-    metaMask(),
     walletConnect({
       projectId: 'b87cf8b78e1c5a9881adabe5765d2461',
       showQrModal: true,
     }),
   ]
   
-
-  const getTransportByChain = (chain) => {
-    const network = sequence.network.findNetworkConfig(sequence.network.allNetworks, chain.id)
-    if (!network) {
-      throw new Error(`Could not find network config for chain ${chain.id}`)
-    }
-
-    return { chain, rpcUrls: { http: [network.rpcUrl] } }
-  }
-
-  const chains = [mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia]
   const transports = {}
+
   chains.forEach(chain => {
-    transports[chain.id] = getTransportByChain(chain)
+    const network = sequence.network.findNetworkConfig(sequence.network.allNetworks, chain.id)
+    if (!network) return
+    transports[chain.id] = http(network.rpcUrl)
   })
+
   const wagmiConfig = createConfig({
     chains,
+    connectors,
     transports,
   })
 

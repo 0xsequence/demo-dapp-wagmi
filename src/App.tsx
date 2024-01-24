@@ -31,13 +31,14 @@ const App = () => {
   const connectors = [
     sequenceWallet({
       defaultNetwork: 137,
+      projectAccessKey: 'iK0DPkHRt0IFo8o4M3fZIIOAAAAAAAAAA',
       connect: {
         app: 'Demo-app',
 
         // This is optional, and only used to point to a custom
         // environment for the wallet app. By default, it will
         // point to https://sequence.app/
-        walletAppURL
+        walletAppURL,
       }
     }),
     walletConnect({

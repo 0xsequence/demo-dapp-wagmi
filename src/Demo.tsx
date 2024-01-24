@@ -26,7 +26,7 @@ configureLogger({ logLevel: 'DEBUG' })
 
 const App = () => {
   const { chains, switchChain } = useSwitchChain()
-  const { isConnected } = useAccount()
+  const { isConnected, chainId } = useAccount()
   const publicClient = usePublicClient()
   const { data: walletClient } = useWalletClient()
   const { connect, connectors, isPending} = useConnect()
@@ -86,7 +86,6 @@ const App = () => {
   const getChainID = async () => {
     try {
       resetConsole()
-      const chainId = await walletClient.getChainId()
       console.log('walletClient.getChainId()', chainId)
       addNewConsoleLine(`walletClient.getChainId(): ${chainId}`)
       setConsoleLoading(false)
@@ -318,7 +317,7 @@ const App = () => {
         <Group label="Network switching">
           {chains.map(chain => {
             return (
-              <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(chain.id, 'wallet-client')}>
+              <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(chain.id, 'switch-network')}>
                 Switch to {chain.name} (walletClient.switchChain)
               </Button>
             )
@@ -357,7 +356,13 @@ const App = () => {
             <Button
               disabled={isPending}
               key={connector.id}
-              onClick={() => connect({ connector })}
+              onClick={() => {
+                try {
+                  connect({ connector })
+                } catch(e) {
+                  console.error('error connecting', e)
+                }
+              }}
             >
               {connector.name}
             </Button>
@@ -390,5 +395,5 @@ const App = () => {
   )
 }
 
-export default React.memo(App)
+export default App
 

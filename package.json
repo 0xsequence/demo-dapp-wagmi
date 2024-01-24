@@ -18,7 +18,7 @@
     "@0xsequence/design-system": "^0.1.107",
     "@0xsequence/ethauth": "0.7.0",
     "@0xsequence/utils": "^1.0.3",
-    "@0xsequence/wagmi-connector": "file:../wagmi-connector",
+    "@0xsequence/wagmi-connector": "^3.0.1",
     "@tanstack/react-query": "^5.17.9",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",

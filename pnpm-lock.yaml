@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.0.3
     version: 1.6.1(ethers@5.7.2)
   '@0xsequence/wagmi-connector':
-    specifier: file:../wagmi-connector
-    version: file:../wagmi-connector(0xsequence@1.8.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.5.1)
+    specifier: ^3.0.1
+    version: 3.0.1(0xsequence@1.8.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.5.1)
   '@tanstack/react-query':
     specifier: ^5.17.9
     version: 5.17.9(react@18.2.0)
@@ -370,6 +370,26 @@ packages:
     dependencies:
       ethers: 5.7.2
       js-base64: 3.7.5
+    dev: false
+
+  /@0xsequence/wagmi-connector@3.0.1(0xsequence@1.8.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.5.1):
+    resolution: {integrity: sha512-DaufLTI3PTfTBL4juFXOn7LpPPHO84YoQKpaWsGl7OsULuHGa0fhXaXZfJ46NIeOY2rFmmGJlvbMBVg6k5GCmA==}
+    peerDependencies:
+      0xsequence: '>=1.1.0 <2.0.0'
+      '@tanstack/react-query': '>=5.17.9'
+      ethers: '>=5.5'
+      viem: '>=2.0.0'
+      wagmi: '>=2.0.0'
+    dependencies:
+      0xsequence: 1.8.1(ethers@5.7.2)
+      '@tanstack/react-query': 5.17.9(react@18.2.0)
+      abitype: 0.8.2(typescript@5.3.3)
+      ethers: 5.7.2
+      viem: 2.0.6(typescript@5.3.3)
+      wagmi: 2.5.1(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
+    transitivePeerDependencies:
+      - typescript
+      - zod
     dev: false
 
   /@0xsequence/wallet@1.8.1(ethers@5.7.2):
@@ -17508,26 +17528,4 @@ packages:
       '@types/react': 18.2.45
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
-
-  file:../wagmi-connector(0xsequence@1.8.1)(@tanstack/react-query@5.17.9)(ethers@5.7.2)(typescript@5.3.3)(viem@2.0.6)(wagmi@2.5.1):
-    resolution: {directory: ../wagmi-connector, type: directory}
-    id: file:../wagmi-connector
-    name: '@0xsequence/wagmi-connector'
-    peerDependencies:
-      0xsequence: '>=1.1.0 <2.0.0'
-      '@tanstack/react-query': '>=5.17.9'
-      ethers: '>=5.5'
-      viem: '>=2.0.0'
-      wagmi: '>=2.0.0'
-    dependencies:
-      0xsequence: 1.8.1(ethers@5.7.2)
-      '@tanstack/react-query': 5.17.9(react@18.2.0)
-      abitype: 0.8.2(typescript@5.3.3)
-      ethers: 5.7.2
-      viem: 2.0.6(typescript@5.3.3)
-      wagmi: 2.5.1(@tanstack/react-query@5.17.9)(@types/react@18.2.45)(react-dom@18.2.0)(react-native@0.73.2)(react@18.2.0)(rollup@2.79.1)(typescript@5.3.3)(viem@2.0.6)
-    transitivePeerDependencies:
-      - typescript
-      - zod
     dev: false

@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { walletConnect } from 'wagmi/connectors'
 
 import { createConfig, WagmiProvider, http } from 'wagmi'
-import { mainnet, polygon, optimism, arbitrum, polygonMumbai, sepolia, Chain } from '@wagmi/chains'
+import { mainnet, polygon, optimism, arbitrum, sepolia, Chain } from 'viem/chains'
 import { sequence } from '0xsequence'
 import Demo from './Demo'
 
@@ -18,7 +18,6 @@ const queryClient = new QueryClient()
 const arbitrumSepolia: Chain = {
   id: 421614,
   name: 'Arbitrum Sepolia',
-  network: 'aribtrum-sepolia',
   testnet: true,
   nativeCurrency: {
     name: 'Arbitrum Sepolia Ether',
@@ -38,7 +37,6 @@ const arbitrumSepolia: Chain = {
 const polygonAmoy: Chain = {
   id: 80002,
   name: 'Polygon Amoy',
-  network: 'polygon-amoy',
   testnet: true,
   nativeCurrency: {
     name: 'Matic Amoy',
@@ -67,16 +65,16 @@ const App = () => {
 
   const connectors = [
     sequenceWallet({
-      defaultNetwork: 137,
-      projectAccessKey: 'iK0DPkHRt0IFo8o4M3fZIIOAAAAAAAAAA',
-      connect: {
+      connectOptions: {
         app: 'Demo-app',
+        projectAccessKey: 'iK0DPkHRt0IFo8o4M3fZIIOAAAAAAAAAA'
+      },
+      defaultNetwork: 137,
 
-        // This is optional, and only used to point to a custom
-        // environment for the wallet app. By default, it will
-        // point to https://sequence.app/
-        walletAppURL
-      }
+      // This is optional, and only used to point to a custom
+      // environment for the wallet app. By default, it will
+      // point to https://sequence.app/
+      walletAppURL
     }),
     walletConnect({
       projectId: 'b87cf8b78e1c5a9881adabe5765d2461',

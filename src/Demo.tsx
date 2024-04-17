@@ -4,14 +4,7 @@ import React, { useState, useEffect } from 'react'
 import logoUrl from './images/logo.svg'
 
 import { ethers } from 'ethers'
-import {
-  useWalletClient,
-  usePublicClient,
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useSwitchChain,
-} from 'wagmi'
+import { useWalletClient, usePublicClient, useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi'
 
 import { Address, formatEther, parseEther } from 'viem'
 
@@ -29,27 +22,27 @@ const App = () => {
   const { isConnected, chainId } = useAccount()
   const publicClient = usePublicClient()
   const { data: walletClient } = useWalletClient()
-  const { connect, connectors, isPending} = useConnect()
-  const { disconnect } =  useDisconnect()
+  const { connect, connectors, isPending } = useConnect()
+  const { disconnect } = useDisconnect()
 
-  const [consoleMsg, setConsoleMsg] = useState<null|string>(null)
+  const [consoleMsg, setConsoleMsg] = useState<null | string>(null)
   const [consoleLoading, setConsoleLoading] = useState<boolean>(false)
 
   const appendConsoleLine = (message: string) => {
-    return (setConsoleMsg((prevState => {
+    return setConsoleMsg(prevState => {
       return `${prevState}\n\n${message}`
-    })))
+    })
   }
-  
+
   const resetConsole = () => {
     setConsoleMsg(null)
     setConsoleLoading(true)
   }
 
   const addNewConsoleLine = (message: string) => {
-    setConsoleMsg((() => {
-      return (message)
-    }))
+    setConsoleMsg(() => {
+      return message
+    })
   }
 
   const consoleWelcomeMessage = () => {
@@ -77,7 +70,7 @@ const App = () => {
       console.log('walletClient.getAddresses()', account)
       addNewConsoleLine(`walletClient.getAddresses(): ${account}`)
       setConsoleLoading(false)
-    } catch(e) {
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
@@ -89,7 +82,7 @@ const App = () => {
       console.log('walletClient.getChainId()', chainId)
       addNewConsoleLine(`walletClient.getChainId(): ${chainId}`)
       setConsoleLoading(false)
-    } catch(e) {
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
@@ -100,29 +93,28 @@ const App = () => {
       resetConsole()
       const [account] = await walletClient.getAddresses()
       const balance = await publicClient.getBalance({
-        address: account,
+        address: account
       })
       const formattedBalance = formatEther(balance)
       console.log('balance', formattedBalance)
       addNewConsoleLine(`balance: ${formattedBalance}`)
-  
-      setConsoleLoading(false) 
-    } catch(e) {
+
+      setConsoleLoading(false)
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
   }
-
 
   const getNetwork = async () => {
     try {
       resetConsole()
       const network = publicClient.chain
       console.log('network:', network)
-  
+
       addNewConsoleLine(`network: ${JSON.stringify(network)}`)
-      setConsoleLoading(false) 
-    } catch(e) {
+      setConsoleLoading(false)
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
@@ -130,7 +122,7 @@ const App = () => {
 
   const signMessage = async () => {
     try {
-      resetConsole()  
+      resetConsole()
       const message = `Two roads diverged in a yellow wood,
   Robert Frost poet
   
@@ -156,17 +148,16 @@ const App = () => {
   Two roads diverged in a wood, and I—
   I took the one less traveled by,
   And that has made all the difference.`
-      
-  
+
       const [account] = await walletClient.getAddresses()
-  
+
       // sign
       const sig = await walletClient.signMessage({
         message,
         account
       })
       console.log('signature:', sig)
-  
+
       addNewConsoleLine(`signature: ${sig}`)
 
       const isValid = await publicClient.verifyMessage({
@@ -176,10 +167,10 @@ const App = () => {
       })
 
       console.log('isValid?', isValid)
-  
+
       appendConsoleLine(`isValid? ${isValid}`)
-      setConsoleLoading(false) 
-    } catch(e) {
+      setConsoleLoading(false)
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
@@ -188,25 +179,25 @@ const App = () => {
   const sendETH = async () => {
     try {
       resetConsole()
-  
+
       console.log(`Transfer txn on ${walletClient.getChainId()}`)
       addNewConsoleLine(`Transfer txn on ${walletClient.getChainId()}`)
-  
+
       const toAddress = ethers.Wallet.createRandom().address
-  
+
       const balance1 = await publicClient.getBalance({
         address: toAddress as Address
       })
       console.log(`balance of ${toAddress}, before:`, balance1)
       appendConsoleLine(`balance of ${toAddress}, before: ${balance1}`)
-      
+
       const [account] = await walletClient.getAddresses()
 
       /* @ts-ignore-next-line */
       await walletClient.sendTransaction({
         to: toAddress as Address,
         value: parseEther('1.00'),
-        account,
+        account
       })
 
       const balance2 = await publicClient.getBalance({
@@ -214,8 +205,8 @@ const App = () => {
       })
       console.log(`balance of ${toAddress}, after:`, balance2)
       appendConsoleLine(`balance of ${toAddress}, after: ${balance2}`)
-      setConsoleLoading(false) 
-    } catch(e) {
+      setConsoleLoading(false)
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
@@ -225,9 +216,9 @@ const App = () => {
     try {
       resetConsole()
       const toAddress = ethers.Wallet.createRandom().address
-  
+
       const amount = ethers.utils.parseUnits('5', 18)
-  
+
       const daiContractAddress = '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063' // (DAI address on Polygon)
 
       const [account] = await walletClient.getAddresses()
@@ -237,13 +228,16 @@ const App = () => {
         account,
         to: daiContractAddress,
         value: 0n,
-        data: new ethers.utils.Interface(ERC_20_ABI).encodeFunctionData('transfer', [toAddress, amount.toHexString()]) as `0x${string}`
+        data: new ethers.utils.Interface(ERC_20_ABI).encodeFunctionData('transfer', [
+          toAddress,
+          amount.toHexString()
+        ]) as `0x${string}`
       })
-  
+
       console.log('transaction response', hash)
       addNewConsoleLine(`TX response ${hash}`)
-      setConsoleLoading(false) 
-    } catch(e) {
+      setConsoleLoading(false)
+    } catch (e) {
       console.error(e)
       consoleErrorMesssage()
     }
@@ -254,15 +248,15 @@ const App = () => {
       resetConsole()
       console.log(`Switching to ${chainId}`, mode)
       addNewConsoleLine(`Switching to ${chainId}`)
-  
+
       if (mode === 'wallet-client') {
         await walletClient.switchChain({ id: chainId })
       } else {
         switchChain({ chainId })
       }
 
-      setConsoleLoading(false) 
-    } catch(e) {
+      setConsoleLoading(false)
+    } catch (e) {
       console
     }
   }
@@ -281,7 +275,6 @@ const App = () => {
 
       console.log('estimated gas:', estimated)
       addNewConsoleLine(`estimated gas: ${estimated}`)
-
     } catch (e) {
       console.error(e)
       consoleErrorMesssage()
@@ -317,7 +310,12 @@ const App = () => {
         <Group label="Network switching">
           {chains.map(chain => {
             return (
-              <Button style={{ height: 66 }} disabled={disableActions} onClick={() => switchTo(chain.id, 'switch-network')}>
+              <Button
+                key={chain.id}
+                style={{ height: 66 }}
+                disabled={disableActions}
+                onClick={() => switchTo(chain.id, 'switch-network')}
+              >
                 Switch to {chain.name} (walletClient.switchChain)
               </Button>
             )
@@ -352,14 +350,14 @@ const App = () => {
     if (!isConnected) {
       return (
         <Box gap="4" flexDirection="column" marginY="4">
-          {connectors.map((connector) => (
+          {connectors.map(connector => (
             <Button
               disabled={isPending}
               key={connector.id}
               onClick={() => {
                 try {
                   connect({ connector })
-                } catch(e) {
+                } catch (e) {
                   console.error('error connecting', e)
                 }
               }}
@@ -373,9 +371,7 @@ const App = () => {
 
     return (
       <Group>
-        <Button onClick={() => disconnect()}>
-          Disconnect Wallet
-        </Button>
+        <Button onClick={() => disconnect()}>Disconnect Wallet</Button>
       </Group>
     )
   }
@@ -386,7 +382,9 @@ const App = () => {
         <Image height="10" alt="logo" src={logoUrl} />
       </Box>
       <Box>
-        <Text color="text100" variant="large">Demo Dapp + Wagmi</Text>
+        <Text color="text100" variant="large">
+          Demo Dapp + Wagmi
+        </Text>
       </Box>
       {getConnectionButtons()}
       {getWalletActions()}
@@ -396,4 +394,3 @@ const App = () => {
 }
 
 export default App
-

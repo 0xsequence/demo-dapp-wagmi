@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.9.19
     version: 1.9.19(ethers@5.7.2)
   '@0xsequence/wagmi-connector':
-    specifier: ^3.1.0
-    version: 3.1.0(0xsequence@1.9.19)(ethers@5.7.2)(viem@2.9.20)(wagmi@2.5.20)
+    specifier: ^3.1.1
+    version: 3.1.1(0xsequence@1.9.19)(ethers@5.7.2)(viem@2.9.20)(wagmi@2.5.20)
   '@tanstack/react-query':
     specifier: ^5.29.2
     version: 5.29.2(react@18.2.0)
@@ -331,8 +331,8 @@ packages:
       js-base64: 3.7.7
     dev: false
 
-  /@0xsequence/wagmi-connector@3.1.0(0xsequence@1.9.19)(ethers@5.7.2)(viem@2.9.20)(wagmi@2.5.20):
-    resolution: {integrity: sha512-quELZ5Jc6FVyfhHb2xatQtGP77R1r7be38nBV5JbigVZTxYqTUbopR3ZKPV6tywF7sYp/ghU25HJB23IUmiz0g==}
+  /@0xsequence/wagmi-connector@3.1.1(0xsequence@1.9.19)(ethers@5.7.2)(viem@2.9.20)(wagmi@2.5.20):
+    resolution: {integrity: sha512-V9y7j4pT/PFmUYGSwo5e/zPBN7N386l6zdQJp53jNWrv/sybgETb9ZxXnjwhAkoVtbcKSSdq5FdKQJK6xkpzpA==}
     peerDependencies:
       0xsequence: '>=1.1.0 <2.0.0'
       ethers: '>=5.5'

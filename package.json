@@ -7,12 +7,11 @@
   "scripts": {
     "dev": "BROWSER=none pnpm start",
     "start": "vite",
-    "build": "BUILD_PATH='./dist' tsc && vite build",
+    "build": "tsc && vite build",
     "serve": "vite preview",
-    "dist": "yarn build",
     "typecheck": "tsc --noEmit",
-    "link-sequence": "yarn link 0xsequence @0xsequence/abi @0xsequence/api @0xsequence/auth @0xsequence/config @0xsequence/guard @0xsequence/multicall @0xsequence/network @0xsequence/provider @0xsequence/relayer @0xsequence/transactions @0xsequence/utils @0xsequence/wallet",
-    "unlink-sequence": "yarn unlink 0xsequence @0xsequence/abi @0xsequence/api @0xsequence/auth @0xsequence/config @0xsequence/guard @0xsequence/multicall @0xsequence/network @0xsequence/provider @0xsequence/relayer @0xsequence/transactions @0xsequence/utils @0xsequence/wallet"
+    "link-sequence": "../sequence.js/scripts/pnpm-link.sh link",
+    "unlink-sequence": "../sequence.js/scripts/pnpm-link.sh unlink"
   },
   "dependencies": {
     "0xsequence": "^1.9.17",

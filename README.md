@@ -1,5 +1,4 @@
-Demo Dapp + Wagmi
-=================
+# Demo Dapp + Wagmi
 
 Dapp example on how to use Sequence Wallet with [Wagmi](https://wagmi.sh). Demonstrates how to connect a wallet, sign messages and send transactions.
 
@@ -9,8 +8,8 @@ For complete documentation on Sequence, please see: [https://docs.sequence.build
 
 ## Usage
 
-1. yarn
-2. yarn dev
+1. pnpm install
+2. pnpm dev
 3. Open browser to http://localhost:4000 to access the demo dapp
 4. Open browser inspector to see responses from your wallet
 
@@ -24,19 +23,15 @@ Also note, sequence.js is built on top of ethers.js, and is API-compatible. Fina
 is compatible with Ethereum EIP1193 and standard JSON-RPC Web3Provider, so any dapp can plug in
 which is compatible with 1193 providers.
 
-
-
 ## Screenshots
 
 **Connect Wallet with Wagmi with Sequence + Metamask + WalletConnect options:**
 
 ![Connect Wallet](./screenshots/screen-open.png)
 
-
 **Execute common wallet functions:**
 
 ![Wallet functions](./screenshots/screen-txn.png)
-
 
 ## LICENSE
 

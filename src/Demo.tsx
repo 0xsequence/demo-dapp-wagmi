@@ -217,7 +217,7 @@ const App = () => {
       resetConsole()
       const toAddress = ethers.Wallet.createRandom().address
 
-      const amount = ethers.utils.parseUnits('5', 18)
+      const amount = ethers.parseUnits('5', 18)
 
       const daiContractAddress = '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063' // (DAI address on Polygon)
 
@@ -228,9 +228,9 @@ const App = () => {
         account,
         to: daiContractAddress,
         value: 0n,
-        data: new ethers.utils.Interface(ERC_20_ABI).encodeFunctionData('transfer', [
+        data: new ethers.Interface(ERC_20_ABI).encodeFunctionData('transfer', [
           toAddress,
-          amount.toHexString()
+          ethers.toQuantity(amount)
         ]) as `0x${string}`
       })
 

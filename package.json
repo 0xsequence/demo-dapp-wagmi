@@ -14,10 +14,10 @@
     "unlink-sequence": "../sequence.js/scripts/pnpm-link.sh unlink"
   },
   "dependencies": {
-    "0xsequence": "^2.0.0",
+    "0xsequence": "^2.0.1",
     "@0xsequence/design-system": "^1.7.6",
     "@0xsequence/ethauth": "1.0.0",
-    "@0xsequence/utils": "^2.0.0",
+    "@0xsequence/utils": "^2.0.1",
     "@0xsequence/wagmi-connector": "^4.0.1",
     "@tanstack/react-query": "^5.29.2",
     "@types/node": "^20.12.7",

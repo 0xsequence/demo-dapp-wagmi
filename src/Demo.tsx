@@ -316,7 +316,7 @@ const App = () => {
                 disabled={disableActions}
                 onClick={() => switchTo(chain.id, 'switch-network')}
               >
-                Switch to {chain.name} (walletClient.switchChain)
+                Switch to {chain.name} (switchChain hook)
               </Button>
             )
           })}

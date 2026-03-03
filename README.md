@@ -25,7 +25,7 @@ which is compatible with 1193 providers.
 
 ## Screenshots
 
-**Connect Wallet with Wagmi with Sequence + Metamask + WalletConnect options:**
+**Connect Wallet with Wagmi with Sequence + MetaMask + WalletConnect options:**
 
 ![Connect Wallet](./screenshots/screen-open.png)
 
